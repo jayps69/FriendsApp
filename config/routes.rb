@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :friends
   # get 'home/index'
+
+  # Custom static route for destroying session/signout (using GET method)
+  devise_scope :user do
+    get 'users/sign_out', to: 'devise/sessions#destroy' # Custom logout route with GET method
+  end
 
   root 'home#index'
   get 'home/about'
